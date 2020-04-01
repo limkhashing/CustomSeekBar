@@ -13,9 +13,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.ContextCompat
-import androidx.core.view.doOnLayout
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlin.math.abs
 
 
 class MainActivity : AppCompatActivity() {
@@ -34,8 +32,6 @@ class MainActivity : AppCompatActivity() {
                 textView.setTypeface(null, Typeface.BOLD)
                 textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,10F)
 
-                seekbar.measure(0 , 0)
-
                 seekbar.afterLayout {
                     Log.d("MainActivity", "Seekbar width = " + seekbar.width)
 
@@ -43,7 +39,8 @@ class MainActivity : AppCompatActivity() {
                     Log.d("MainActivity", "Textview width = " + textView.measuredWidth.toString())
                     Log.d("MainActivity", "String width = " + Paint().measureText(textView.text.toString()).toString())
 
-                    val paddingStart = (seekbar.width * (3/10F)) - (textView.measuredWidth / 2F)
+                    val seekbarDefaultPadding = dpToPixels(resources.displayMetrics, 16F)
+                    val paddingStart = seekbarDefaultPadding + ((seekbar.width - seekbarDefaultPadding * 2 )  * (2 / 5F)) - (textView.measuredWidth / 2F)
                     Log.d("MainActivity", "Total padding start = " + paddingStart.toString())
 
                     val set = ConstraintSet()
