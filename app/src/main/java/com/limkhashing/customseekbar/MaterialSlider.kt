@@ -20,7 +20,7 @@ import androidx.core.content.res.ResourcesCompat
  *
  * This is done purely as a wrapper over Seekbar with some minor changes to the onDraw function.
  */
-class MaterialSlider(context: Context?, attrs: AttributeSet?) : SeekBar(context, attrs) {
+class MaterialSlider(context: Context?, attrs: AttributeSet?) : androidx.appcompat.widget.AppCompatSeekBar(context, attrs) {
     private val tickBeforePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = R.color.mid_green.getColour(context)
         style = Paint.Style.FILL
@@ -121,7 +121,7 @@ class MaterialSlider(context: Context?, attrs: AttributeSet?) : SeekBar(context,
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-        //removing padding to get width of the progress bar
+        // removing padding to get width of the progress bar
         val increment = ((width - paddingLeft - paddingRight) / sections).toFloat()
         for (i in 0..sections) {
             val position =

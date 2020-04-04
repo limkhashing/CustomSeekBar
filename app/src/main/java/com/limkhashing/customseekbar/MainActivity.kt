@@ -1,10 +1,8 @@
 package com.limkhashing.customseekbar
 
-import android.graphics.Paint
 import android.graphics.Typeface
 import android.os.Bundle
 import android.util.DisplayMetrics
-import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewTreeObserver
@@ -32,16 +30,11 @@ class MainActivity : AppCompatActivity() {
                 textView.setTypeface(null, Typeface.BOLD)
                 textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,10F)
 
-                seekbar.afterLayout {
-                    Log.d("MainActivity", "Seekbar width = " + seekbar.width)
-
+                seekbar .afterLayout {
+                    // Start Padding = seekbarDefaultPadding + (seekbar Width - seekbarDefaultPadding * 2) * (recommended tick  / how many bar)) - (TextView Width / 2)
                     textView.measure(0, 0)
-                    Log.d("MainActivity", "Textview width = " + textView.measuredWidth.toString())
-                    Log.d("MainActivity", "String width = " + Paint().measureText(textView.text.toString()).toString())
-
                     val seekbarDefaultPadding = dpToPixels(resources.displayMetrics, 16F)
-                    val paddingStart = seekbarDefaultPadding + ((seekbar.width - seekbarDefaultPadding * 2 )  * (2 / 5F)) - (textView.measuredWidth / 2F)
-                    Log.d("MainActivity", "Total padding start = " + paddingStart.toString())
+                    val paddingStart = seekbarDefaultPadding + ((seekbar.width - seekbarDefaultPadding * 2 )  * (5 / 10F)) - (textView.measuredWidth / 2F)
 
                     val set = ConstraintSet()
                     layout.addView(textView)
